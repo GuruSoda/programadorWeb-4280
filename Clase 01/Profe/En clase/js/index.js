@@ -102,8 +102,18 @@ kgkhgjhg
 
 // Boleano
 
-var booleanValue1 = true
+// var booleanValue1 = true
 
-var booleanValue2 = false
+// var booleanValue2 = false
 
-console.log(booleanValue1, booleanValue2)
+// console.log(booleanValue1, booleanValue2)
+
+var number1 = prompt('Ingresá un numero')
+
+var number2 = 2
+
+var parsedNumber1 = parseFloat(number1, 10)
+
+var total = parsedNumber1 + number2
+
+console.log('El resultado es ' + total)
