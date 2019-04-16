@@ -128,30 +128,64 @@ console.log('Init app')
 //     break
 // }
 
-var userName
+// var userName
 
-var name1 = 'Pedro'
+// var name1 = 'Pedro'
 
-var name2 = 'Juan'
+// var name2 = 'Juan'
 
-var message = 'Hola '
+// var message = 'Hola '
 
-if (name1) {
-  message = message + name1 + ' y '
+// if (name1) {
+//   message = message + name1 + ' y '
+// }
+
+// if (name2) {
+//   message = message + name2
+// }
+
+// console.log(message)
+
+// if (userName) {
+//   if (password) {
+//     console.log('Ingresó')
+//   } else {
+//     console.log('No hay contraseña')
+//   }
+// } else {
+//   console.log('No hay usuario')
+// }
+
+// var color = prompt('Ingresé un color')
+
+var color = 'red'
+
+var price = 1000
+
+var message = ''
+
+switch (color) {
+  case 'red':
+  case 'blue':
+    message = 'Es un color oscuro'
+    break
+
+  case 'yellow':
+  case 'white':
+    message = 'Es un color claro'
+    break
+
+  default:
+    message = 'Color inválido'
+    break
 }
 
-if (name2) {
-  message = message + name2
+if (price > 500) {
+  message = message + ' y es caro'
+} else {
+  message = message + ' y es barato'
 }
 
 console.log(message)
 
-if (userName) {
-  if (password) {
-    console.log('Ingresó')
-  } else {
-    console.log('No hay contraseña')
-  }
-} else {
-  console.log('No hay usuario')
-}
+// Comentario
