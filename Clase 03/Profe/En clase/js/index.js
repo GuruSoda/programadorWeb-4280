@@ -117,42 +117,84 @@ console.log('Estoy aquí!')
 //   password = prompt('Ingresá contraseña')
 // } while (!password)
 
-var daysOfTheWeek = [
-  'Lunes',
-  'Martes',
-  'Miércoles',
-  'Miercoles',
-  'Jueves',
-  'Viernes',
-  'Sábado',
-  'Sabado',
-  'Domingo',
-  'Pato'
-]
+// var daysOfTheWeek = [
+//   'Lunes',
+//   'Martes',
+//   'Miércoles',
+//   'Miercoles',
+//   'Jueves',
+//   'Viernes',
+//   'Sábado',
+//   'Sabado',
+//   'Domingo',
+//   'Pato'
+// ]
 
-for (var i = 0; i < daysOfTheWeek.length; i++) {
-  var day = daysOfTheWeek[i]
-  var message = 'El '
+// for (var i = 0; i < daysOfTheWeek.length; i++) {
+//   var day = daysOfTheWeek[i]
+//   var message = 'El '
 
-  // TODO: Ver publicidad día Osvaldo
-  switch (day) {
-    case 'Lunes':
-    case 'Martes':
-    case 'Miercoles':
-    case 'Miércoles':
-    case 'Jueves':
-    case 'Viernes':
-      message = message + day + ' es día de semana'
-      break
-    case 'Sabado':
-    case 'Sábado':
-    case 'Domingo':
-      message = message + day + ' es día de fin de semana'
-      break
-    default:
-      message = message + day + ' no es un día válido'
-      break
-  }
+//   // TODO: Ver publicidad día Osvaldo
+//   switch (day) {
+//     case 'Lunes':
+//     case 'Martes':
+//     case 'Miercoles':
+//     case 'Miércoles':
+//     case 'Jueves':
+//     case 'Viernes':
+//       message = message + day + ' es día de semana'
+//       break
+//     case 'Sabado':
+//     case 'Sábado':
+//     case 'Domingo':
+//       message = message + day + ' es día de fin de semana'
+//       break
+//     default:
+//       message = message + day + ' no es un día válido'
+//       break
+//   }
 
-  console.log(message)
+//   console.log(message)
+// }
+
+var operation = prompt('Ingresá la operación')
+
+var number1 = prompt('Ingrese el primer número')
+var number2 = prompt('Ingrese el segundo número')
+
+var parsedNumber1 = parseFloat(number1, 10)
+var parsedNumber2 = parseFloat(number2, 10)
+
+switch (operation) {
+  case 'mul':
+  case '*':
+    console.log(
+      'El resultado de la multiplicación es ' + parsedNumber1 * parsedNumber2
+    )
+    break
+  case 'sum':
+  case '+':
+    console.log('El resultado de la suma es ' + (parsedNumber1 + parsedNumber2))
+    break
+  case 'res':
+  case '-':
+    console.log(
+      'El resultado de la resta es ' + (parsedNumber1 - parsedNumber2)
+    )
+    break
+  case 'div':
+  case '/':
+    while (parsedNumber2 === 0) {
+      number2 = prompt(
+        'El dividendo no puede ser cero, ingrese el segundo de número de nuevo'
+      )
+      parsedNumber2 = parseFloat(number2, 10)
+    }
+    console.log(
+      'El resultado de la división es ' + parsedNumber1 / parsedNumber2
+    )
+    break
+  default:
+    console.log('Operación no valida')
+    break
 }
