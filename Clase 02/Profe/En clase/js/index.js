@@ -187,5 +187,3 @@ if (price > 500) {
 }
 
 console.log(message)
-
-// Comentario

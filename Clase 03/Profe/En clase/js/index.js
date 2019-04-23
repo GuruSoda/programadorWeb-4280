@@ -104,3 +104,55 @@ console.log('Estoy aquí!')
 //   value = firstName[i]
 //   console.log(value)
 // }
+
+// Trabajando re tranquilo local
+
+// Test
+
+// Mini ejercicio
+
+// var password
+
+// do {
+//   password = prompt('Ingresá contraseña')
+// } while (!password)
+
+var daysOfTheWeek = [
+  'Lunes',
+  'Martes',
+  'Miércoles',
+  'Miercoles',
+  'Jueves',
+  'Viernes',
+  'Sábado',
+  'Sabado',
+  'Domingo',
+  'Pato'
+]
+
+for (var i = 0; i < daysOfTheWeek.length; i++) {
+  var day = daysOfTheWeek[i]
+  var message = 'El '
+
+  // TODO: Ver publicidad día Osvaldo
+  switch (day) {
+    case 'Lunes':
+    case 'Martes':
+    case 'Miercoles':
+    case 'Miércoles':
+    case 'Jueves':
+    case 'Viernes':
+      message = message + day + ' es día de semana'
+      break
+    case 'Sabado':
+    case 'Sábado':
+    case 'Domingo':
+      message = message + day + ' es día de fin de semana'
+      break
+    default:
+      message = message + day + ' no es un día válido'
+      break
+  }
+
+  console.log(message)
+}
