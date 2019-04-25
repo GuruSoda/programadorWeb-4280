@@ -1,19 +1,17 @@
-/Clase 00
-
 # Common files
 
 .DS_Store
 /**/.DS_Store
+
+# Node modules
+
 /node_modules
 /**/node_modules
 **/**/node_modules
-/Teoria plataforma
 
 # Clases to ignore
-/Clase 0
-/Clase 04/Profe/Ejercicio
-/Clase 04/Profe/Desafío
-/Clase 05
+/Clase 05/Profe/Ejercicio
+/Clase 05/Profe/Desafío
 /Clase 06
 /Clase 07
 /Clase 08

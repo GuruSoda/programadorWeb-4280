@@ -198,3 +198,7 @@ switch (operation) {
     console.log('Operación no valida')
     break
 }
+
+for (var i = 0; i < 10; i++) {
+  console.log(i)
+}

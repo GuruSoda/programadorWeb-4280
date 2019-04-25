@@ -147,18 +147,93 @@ console.log('Init app clase 04')
 
 // console.log(message1)
 
-var items = [ 22, 30, 28, 25, 24, 44, 40, 25 ]
+// var items = [ 22, 30, 28, 25, 24, 44, 40, 25 ]
 
-var result = sumAges(items)
+// var result = sumAges(items)
 
-console.log('La edad de todos sumada es ' + result)
+// console.log('La edad de todos sumada es ' + result)
 
-function sumAges (agesArray) {
-  var total = 0
-  var age
-  for (var i = 0; i < agesArray.length; i++) {
-    age = agesArray[i]
-    total = total + age
+// function sumAges (agesArray) {
+//   var total = 0
+//   var age
+//   for (var i = 0; i < agesArray.length; i++) {
+//     age = agesArray[i]
+//     total = total + age
+//   }
+//   return total
+// }
+
+// var examResults = [ 7, 5, 6, 4, 3, 2, 8, 10, 2, 3, 8 ]
+
+// var averageResult = calcAverage(examResults)
+
+// console.log(averageResult)
+
+// function calcAverage (agesArray) {
+//   var total = 0
+//   var age
+//   for (var i = 0; i < agesArray.length; i++) {
+//     age = agesArray[i]
+//     total = total + age
+//   }
+
+//   var result = total / agesArray.length
+
+//   return result
+// }
+
+// function calcAverage (agesArray) {
+//   var total = 0
+//   for (var i = 0; i < agesArray.length; i++) {
+//     total = total + agesArray[i]
+//   }
+
+//   return total / agesArray.length
+// }
+
+// Object
+
+// var firstName = 'Marcela'
+// var lastName = 'Correa'
+// var age = 29
+
+// var student = {
+//   lastName: 'Correa',
+//   firstName: 'Marcela',
+//   age: 29
+// }
+
+// console.log(student['firstName'])
+// console.log(student['lastName'])
+// console.log(student.age)
+
+var students = [
+  {
+    lastName: 'Correa',
+    firstName: 'Marcela',
+    age: 30
+  },
+  {
+    lastName: 'Adrián',
+    firstName: 'Ferré',
+    age: 30
   }
-  return total
+]
+
+var result = getPosition(29, students)
+
+console.log('La posición del estudiante de 29 años es ' + result)
+
+function getPosition (age, studentsArray) {
+  var student
+  var total = 0
+  for (var i = 0; i < studentsArray.length; i++) {
+    student = studentsArray[i]
+
+    if (student.age === age) {
+      return i
+    }
+  }
+
+  return -1
 }
