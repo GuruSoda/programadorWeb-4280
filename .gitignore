@@ -10,9 +10,8 @@
 **/**/node_modules
 
 # Clases to ignore
-/Clase 05/Profe/Ejercicio
-/Clase 05/Profe/Desafío
-/Clase 06
+/Clase 06/Profe/Ejercicio
+/Clase 06/Profe/Desafío
 /Clase 07
 /Clase 08
 /Clase 09
