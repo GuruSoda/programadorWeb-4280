@@ -208,3 +208,48 @@ console.log('Estamos de paro!')
 // }
 
 // console.log(colors)
+
+// var numbers = [1,2,3,4,5]
+
+// var numbersUpdated = numbers.slice()
+
+// function deleteElement (a, b){
+//     numbersUpdated.splice (a, b)
+//     return numbersUpdated
+// }
+// console.log(numbers)
+
+// console.log(deleteElement(2, 1))
+
+// var numbers = [ 1, 2, 3, 4, 5 ]
+
+// var numbersCopy = numbers.slice()
+
+// numbers.push(98)
+
+// console.log(numbers)
+// console.log(numbersCopy)
+// console.log(numbers === numbersCopy)
+
+// var text = 'Pato'
+
+// var textCopy = text
+
+// text = 'Ganso'
+
+// console.log(text)
+// console.log(textCopy)
+// console.log(text === textCopy)
+
+function deleteElement (index, array) {
+  var arrayCopy = array.slice()
+
+  arrayCopy.splice(index, 1)
+
+  return arrayCopy
+}
+
+var newNumbers = deleteElement(2, numbers) // Devuelve un nuevo Array [1,2,4,5]
+
+console.log(numbers)
+console.log(newNumbers)
