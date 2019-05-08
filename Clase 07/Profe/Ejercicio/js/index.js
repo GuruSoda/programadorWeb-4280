@@ -39,3 +39,5 @@ function setLocalList (key, list) {
 
 // Pruebo la función
 setLocalList('studentsList', studentsList)
+
+setLocalList('pato', [ 'Pato', 'Pato', 'Ñato' ])
