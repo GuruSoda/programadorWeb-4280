@@ -48,28 +48,28 @@ console.log('Es mi idola! By Undi')
 // }
 
 // Busca el nodo con id farm-list
-var farmList = document.getElementById('farm-list')
+// var farmList = document.getElementById('farm-list')
 
-var animals = [
-  { name: 'Orson', color: 'pink' },
-  { name: 'Roy', color: 'red' },
-  { name: 'Wade', color: 'yellow' }
-]
+// var animals = [
+//   { name: 'Orson', color: 'pink' },
+//   { name: 'Roy', color: 'red' },
+//   { name: 'Wade', color: 'yellow' }
+// ]
 
-for (var i = 0; i < animals.length; i++) {
-  var animal = animals[i]
+// for (var i = 0; i < animals.length; i++) {
+//   var animal = animals[i]
 
-  // Crea un nodo li
-  var li = document.createElement('li')
+//   // Crea un nodo li
+//   var li = document.createElement('li')
 
-  // Pisa el contenido del nodo li recién creado
-  li.innerHTML = '<h6>' + animal.name + '</h6>' + '<p>' + animal.color + '</p>'
-  li.style.color = animal.color
-  li.id = 'farm-list-' + i
+//   // Pisa el contenido del nodo li recién creado
+//   li.innerHTML = '<h6>' + animal.name + '</h6>' + '<p>' + animal.color + '</p>'
+//   li.style.color = animal.color
+//   li.id = 'farm-list-' + i
 
-  // Agrega al final de la lista
-  farmList.appendChild(li)
-}
+//   // Agrega al final de la lista
+//   farmList.appendChild(li)
+// }
 
 // var index = prompt('Ingrese el elento a remover')
 
@@ -79,3 +79,20 @@ for (var i = 0; i < animals.length; i++) {
 
 // // Le pido al padre que lo remueva
 // elementToRemove.parentNode.removeChild(elementToRemove)
+
+var texts = [ 'Ed', 'Edd', 'Eddy' ]
+
+var characterList = document.getElementById('mainList')
+
+for (var i = 0; i < texts.length; i++) {
+  var text = texts[i]
+
+  // Crea un nodo li
+  var li = document.createElement('li')
+
+  li.innerHTML = text
+  li.className = 'list-group-item'
+
+  // Agrega al final de la lista
+  characterList.appendChild(li)
+}
