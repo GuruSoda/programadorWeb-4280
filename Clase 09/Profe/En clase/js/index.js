@@ -19,34 +19,59 @@ console.log('Llueve mucho!')
 //   console.log('Hicieron click', emailValue)
 // }
 
-var nameInput = document.getElementById('name')
-var lastNameInput = document.getElementById('lastName')
-var button = document.getElementById('button')
+// var nameInput = document.getElementById('name')
+// var lastNameInput = document.getElementById('lastName')
+// var button = document.getElementById('button')
 
-nameInput.onblur = validateRequired
-lastNameInput.onblur = validateRequired
+// nameInput.onblur = validateRequired
+// lastNameInput.onblur = validateRequired
 
-function validateRequired (event) {
+// function validateRequired (event) {
+//   var inputNode = event.target
+//   var inputValue = inputNode.value
+
+//   if (!inputValue) {
+//     inputNode.classList.add('is-invalid')
+//     inputNode.classList.remove('is-valid')
+//   } else {
+//     inputNode.classList.add('is-valid')
+//     inputNode.classList.remove('is-invalid')
+//   }
+
+//   checkButtonValidation()
+// }
+
+// function checkButtonValidation () {
+//   var validInputs = document.getElementsByClassName('is-valid')
+
+//   if (validInputs.length === 2) {
+//     button.disabled = false
+//   } else {
+//     button.disabled = true
+//   }
+// }
+
+var cpInput = document.getElementById('cp')
+
+cpInput.onblur = validateCp
+
+function validateCp (event) {
   var inputNode = event.target
+
   var inputValue = inputNode.value
 
-  if (!inputValue) {
+  var parsedInputValue = parseInt(inputValue, 10)
+
+  if (
+    !inputValue ||
+    isNaN(parsedInputValue) ||
+    parsedInputValue < 1000 ||
+    parsedInputValue > 9999
+  ) {
     inputNode.classList.add('is-invalid')
     inputNode.classList.remove('is-valid')
   } else {
     inputNode.classList.add('is-valid')
     inputNode.classList.remove('is-invalid')
-  }
-
-  checkButtonValidation()
-}
-
-function checkButtonValidation () {
-  var validInputs = document.getElementsByClassName('is-valid')
-
-  if (validInputs.length === 2) {
-    button.disabled = false
-  } else {
-    button.disabled = true
   }
 }
