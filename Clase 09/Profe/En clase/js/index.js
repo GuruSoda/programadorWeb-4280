@@ -1,20 +1,52 @@
 console.log('Llueve mucho!')
 
+// var button = document.getElementById('button')
+// var emailInput = document.getElementById('email')
+
+// button.onclick = buttonClick
+
+// function buttonClick () {
+//   var emailValue = emailInput.value
+
+//   if (emailValue.indexOf('@') === -1 || emailValue.indexOf('.') === -1) {
+//     emailInput.classList.add('is-invalid')
+//     emailInput.classList.remove('is-valid')
+//   } else {
+//     emailInput.classList.add('is-valid')
+//     emailInput.classList.remove('is-invalid')
+//   }
+
+//   console.log('Hicieron click', emailValue)
+// }
+
+var nameInput = document.getElementById('name')
+var lastNameInput = document.getElementById('lastName')
 var button = document.getElementById('button')
-var emailInput = document.getElementById('email')
 
-button.onclick = buttonClick
+nameInput.onblur = validateRequired
+lastNameInput.onblur = validateRequired
 
-function buttonClick () {
-  var emailValue = emailInput.value
+function validateRequired (event) {
+  var inputNode = event.target
+  var inputValue = inputNode.value
 
-  if (emailValue.indexOf('@') === -1 || emailValue.indexOf('.') === -1) {
-    emailInput.classList.add('is-invalid')
-    emailInput.classList.remove('is-valid')
+  if (!inputValue) {
+    inputNode.classList.add('is-invalid')
+    inputNode.classList.remove('is-valid')
   } else {
-    emailInput.classList.add('is-valid')
-    emailInput.classList.remove('is-invalid')
+    inputNode.classList.add('is-valid')
+    inputNode.classList.remove('is-invalid')
   }
 
-  console.log('Hicieron click', emailValue)
+  checkButtonValidation()
+}
+
+function checkButtonValidation () {
+  var validInputs = document.getElementsByClassName('is-valid')
+
+  if (validInputs.length === 2) {
+    button.disabled = false
+  } else {
+    button.disabled = true
+  }
 }
