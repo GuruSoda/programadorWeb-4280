@@ -3,13 +3,22 @@ console.log('Primer workshop')
 // Busco si hay algo en el LS y sino hay me devuelve un Array vacio
 var studentsList = getLocalList('list')
 
-// Busco el campo nombre y DNI en el DOM y el botón agregar
+// Agregar
 var firstNameInput = document.getElementById('firstName')
 var dniInput = document.getElementById('dni')
-var deleteDniInput = document.getElementById('deleteDni')
 var addStudentButton = document.getElementById('addStudentButton')
+
+// Eliminar
+var deleteDniInput = document.getElementById('deleteDni')
 var deleteStudentButton = document.getElementById('deleteStudentButton')
+
+// Lista tanto agregar como eliminar
 var mainListNode = document.getElementById('mainList')
+
+// Búsqueda
+var searchTextInput = document.getElementById('searchText')
+var searchStudentButton = document.getElementById('searchStudentButton')
+var searchListNode = document.getElementById('searchList')
 
 // Carga incial de los elementos en el DOM
 for (var i = 0; i < studentsList.length; i++) {
@@ -25,6 +34,26 @@ dniInput.onblur = validateDni
 // Con el botón validado llamo a la función que agrega el estudiante
 addStudentButton.onclick = addStudent
 deleteStudentButton.onclick = deleteStudent
+searchStudentButton.onclick = searchStudent
+
+function searchStudent () {
+  // Busco el valor en input a eliminar
+  var text = searchTextInput.value
+
+  var index = searchStudentIndexByText(text, studentsList)
+
+  // Limpio la lista de búsqueda
+  searchListNode.innerHTML = ''
+
+  if (index !== -1) {
+    // Lo encontré
+    var student = studentsList[index]
+
+    var liSearch = createStudentNode(student)
+
+    searchListNode.appendChild(liSearch)
+  }
+}
 
 function deleteStudent () {
   // Busco el valor en input a eliminar
@@ -249,4 +278,53 @@ function searchStudentIndexByDni (dni, studentsList) {
     }
   }
   return index
+}
+
+/**
+ * searchStudentIndexByText permite buscar la posición de un estudiante en el array,
+ * comparando nombre o apellido por valor exacto
+ * @param {string} text nombre del estudiante
+ * @param {Array} studentsList Array de estudiantes
+ * @returns {number} posición del estudiante en el Array, si no lo encuentra -1
+ */
+
+function searchStudentIndexByText (text, studentsList) {
+  var index = -1
+  for (var i = 0; i < studentsList.length; i++) {
+    var student = studentsList[i]
+    if (
+      // student.firstName === text ||
+      includesText(text, student.firstName) ||
+      // student.lastName === text
+      includesText(text, student.lastName)
+    ) {
+      index = i
+      break
+    }
+  }
+  return index
+}
+
+/**
+ * includesText busca coincidencias parciales del primer texto
+ * dentro del segundo
+ * @param {*} text texto a buscar
+ * @param {*} baseText texto donde se va a realizar la búsqueda
+ * @returns {boolean} true si encuentra y false en caso contrario
+ */
+function includesText (text, baseText) {
+  // Valido que ambos parámetros sean string
+  if (typeof text === 'string' && typeof baseText === 'string') {
+    // Verifico si el primer parámetro se encuentra dentro del segundo
+    var textUpperCase = text.toUpperCase()
+    var baseTextUpperCase = baseText.toUpperCase()
+
+    if (baseTextUpperCase.indexOf(textUpperCase) !== -1) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
 }
