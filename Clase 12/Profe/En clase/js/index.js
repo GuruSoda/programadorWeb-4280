@@ -62,4 +62,8 @@ $(document).ready(function () {
 
     node.addClass('is-valid')
   }
+
+  var input = $('#input')
+
+  var value = input.val()
 })
