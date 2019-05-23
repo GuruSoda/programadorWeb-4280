@@ -15,4 +15,3 @@ El formulario deberá validar el campo email verificando que contenga arroba, pu
 [Remove class jQuery](http://api.jquery.com/removeClass/)
 
 [Boostrap forms](https://getbootstrap.com/docs/4.0/components/forms/)
-
