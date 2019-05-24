@@ -1,5 +1,9 @@
 // Busco el elemento en el DOM y le asigno la función validateEmailField en el evento blur
-$('#email').blur(validateEmailField)
+var emailInput = $('#email')
+
+emailInput.blur(validateEmailField)
+
+// $('#email').blur(validateEmailField)
 
 /**
  * validateEmailField es una función que valida que el campo exista y contenga

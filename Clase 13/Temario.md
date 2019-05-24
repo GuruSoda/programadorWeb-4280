@@ -7,6 +7,7 @@
    - `.next()`
    - `.remove()`
    - `.parent()`
+   - `.css()`
 - 13.1 Responder a eventos del teclado
    - `.keydown()`
       - Enter: 13
