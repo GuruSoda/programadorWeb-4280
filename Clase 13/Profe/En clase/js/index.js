@@ -96,20 +96,20 @@ $(document).ready(function () {
   //    - `.css()`
   // - 13.1 Responder a eventos del teclado
   //    - `.keydown()`
-  $(window).keydown(keyDownPress)
+  // $(window).keydown(keyDownPress)
 
-  function keyDownPress (event) {
-    var keyCode = event.keyCode
+  // function keyDownPress (event) {
+  //   var keyCode = event.keyCode
 
-    switch (keyCode) {
-      case 27:
-        console.log('Salir de pantalla completa')
-        break
-      case 32:
-        console.log('Pausar video')
-        break
-    }
-  }
+  //   switch (keyCode) {
+  //     case 27:
+  //       console.log('Salir de pantalla completa')
+  //       break
+  //     case 32:
+  //       console.log('Pausar video')
+  //       break
+  //   }
+  // }
 
   //       - Enter: 13
   //       - Up: 38
@@ -121,4 +121,30 @@ $(document).ready(function () {
   //       - Ctrl: 17
   //       - Alt: 18
   //       - Shift: 16
+
+  var firstNameInput = $('#firstName')
+
+  firstNameInput.on('input', changeInputValue)
+
+  function changeInputValue () {
+    var inputNode = $(this)
+
+    var value = inputNode.val()
+
+    // var valueLowerCase = value.replace(' ', '')
+
+    // inputNode.val(valueLowerCase)
+
+    console.log('Tu valor en pesos es ', value * 45)
+  }
 })
+
+// var counter = 0
+
+// counter--
+
+// counter = counter - 1
+
+// counter++
+
+// counter = counter + 1
