@@ -1,0 +1,44 @@
+// # Eliminar un elemento usando una animación de jQuery
+<<<<<<< HEAD
+// La función `removeElementWithAnimation` tiene que recibir como parámetro un Id 
+// y eliminar el elemento usando en conjunto una animación de jQuery para que el cambio no sea tan brusco.
+
+$(document).ready(function () {
+  $('button').on('click', removeElementWithAnimation)
+
+  function removeElementWithAnimation() {
+
+    // nodoFila = registro de la tabla (tr)
+    var nodoFila = $(this).parent().parent() // primer parent el td, segundo parent es el nodo tr
+
+    // lo oculta del DOM en 750ms y cuando termina llama a la funcion.
+    nodoFila.hide(750, function () {
+      nodoFila.remove()
+    })
+  }
+})
+=======
+// La función `removeElementWithAnimation` tiene que recibir como parámetro un Id y eliminar el elemento usando en conjunto
+//   una animación de jQuery para que el cambio no sea tan brusco.
+
+$(document).ready(function () {
+  console.log('Desafio 14!')
+
+  $('.btn').click(function () {
+    var nodo = $(this).parent().parent()
+
+    nodo.fadeOut(500, function () {
+      nodo.remove()
+    })
+  })
+  /*
+  // mal hecho, tiene que ser generico
+  $('#botonEliminar').click(function (evento) {
+    console.log('Eliminar!')
+    $('#1').fadeOut(750, function () {
+      $('#1').remove()
+    })
+  })
+  */
+})
+>>>>>>> 39f4299ce9f3802524b24151a65c4373c6cb6926
