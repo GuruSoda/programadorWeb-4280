@@ -31,3 +31,17 @@ console.log(includesText('pa', 'Patricia')) // Deberá devolver true
 console.log(includesText('Patricia', 'Pa')) // Deberá devolver false
 
 console.log(includesText(2, 'Pa')) // Deberá devolver false
+
+var text = 'Pato'
+
+var name = 'Princess Carolyn'
+
+var isIncluded = includesText(text, name)
+
+// var isIncluded = name.includes(text)
+
+if (isIncluded) {
+  console.log(text + ' está incluido en ' + name)
+} else {
+  console.log(text + ' NO está incluido en ' + name)
+}
