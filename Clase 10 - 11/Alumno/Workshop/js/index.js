@@ -16,6 +16,7 @@ var mainListNode = document.getElementById('mainList')
 
 var searchButton = document.getElementById('searchStudentButton')
 var searchInput = document.getElementById('searchText')
+var resultadoBusquedaNode = document.getElementById('searchList')
 
 // Carga incial de los elementos en el DOM
 for (var i = 0; i < studentsList.length; i++) {
@@ -35,7 +36,7 @@ addStudentButton.onclick = addStudent
 deleteStudentButton.onclick = deleteStudent
 searchButton.onclick = searchStudent
 
-function deleteStudent () {
+function deleteStudent() {
   // Busco el valor en input a eliminar
   var dniValue = deleteDniInput.value
 
@@ -62,7 +63,7 @@ function deleteStudent () {
   }
 }
 
-function addStudent () {
+function addStudent() {
   // Levanto los valores ya validados del form
   var firstNameValue = firstNameInput.value
   var dniValue = dniInput.value
@@ -101,9 +102,20 @@ function addStudent () {
   addStudentButton.disabled = true
 }
 
-function searchStudent () {}
+function searchStudent() {
 
-function validateDni (event) {
+  var nroDNI = searchInput.value
+
+  var index = searchStudentIndexByText(nroDNI, studentsList)
+
+  resultadoBusquedaNode.innerHTML = ''
+
+  if (index >= 0) {
+    resultadoBusquedaNode.appendChild(createStudentNode(studentsList[index]))
+  }
+}
+
+function validateDni(event) {
   // Encuetro que nodo disparó el evento blur
   var inputNode = event.target
 
@@ -135,7 +147,7 @@ function validateDni (event) {
   validateAddButton()
 }
 
-function validateEmail (event) {
+function validateEmail(event) {
   // Encuetro que nodo disparó el evento blur
   var emailInput = event.target
 
@@ -153,7 +165,7 @@ function validateEmail (event) {
   validateAddButton()
 }
 
-function validateRequired (event) {
+function validateRequired(event) {
   // Encuetro que nodo disparó el evento blur
   var inputNode = event.target
 
@@ -174,7 +186,7 @@ function validateRequired (event) {
 }
 
 // Función para validar ti todos los campos son validos y habilitar el botón
-function validateAddButton () {
+function validateAddButton() {
   // Busco todos los campos válido
   var validInputs = document.getElementsByClassName('is-valid')
 
@@ -191,7 +203,7 @@ function validateAddButton () {
  * @param {string} key 
  * @param {Array} list 
  */
-function setLocalList (key, list) {
+function setLocalList(key, list) {
   // Verifico los parámetros recibidos
   if (typeof key === 'string' && Array.isArray(list)) {
     // Convierto a JSON el array
@@ -207,7 +219,7 @@ function setLocalList (key, list) {
  * @param {string} key 
  * @returns {Array}
  */
-function getLocalList (key) {
+function getLocalList(key) {
   // Valido que reciba un string
   if (typeof key === 'string') {
     // Trato de recuperar la lista del localStorage
@@ -229,7 +241,7 @@ function getLocalList (key) {
  * @param { Student } newStudent
  * @returns Node
  */
-function createStudentNode (newStudent) {
+function createStudentNode(newStudent) {
   // Creo el nodo li
   var liNode = document.createElement('li')
 
@@ -255,7 +267,7 @@ function createStudentNode (newStudent) {
     fullName +
     '</h1><h3>DNI:' +
     newStudent.dni +
-    '</h3><p>E-mail:' +
+    '</h3><p>Correo:' +
     newStudent.email +
     '</p>'
 
@@ -271,7 +283,7 @@ function createStudentNode (newStudent) {
  * @returns {number} posición del estudiante en el Array, si no lo encuentra -1
  */
 
-function searchStudentIndexByDni (dni, studentsList) {
+function searchStudentIndexByDni(dni, studentsList) {
   var index = -1
 
   for (var i = 0; i < studentsList.length; i++) {
@@ -284,7 +296,7 @@ function searchStudentIndexByDni (dni, studentsList) {
   return index
 }
 
-function searchStudentIndexByText (texto, vector) {
+function searchStudentIndexByText(texto, vector) {
   for (var i = 0; i < vector.length; i++) {
     if (texto === vector[i].firstName || texto === vector[i].lastName) return i
   }
