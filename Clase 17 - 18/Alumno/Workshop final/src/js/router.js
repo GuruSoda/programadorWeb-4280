@@ -1,5 +1,6 @@
 import crossroads from 'crossroads'
 import contactController from './controllers/contactController'
+import peopleController from './controllers/peopleController'
 
 function router () {
   crossroads.addRoute('', function () {
@@ -10,7 +11,8 @@ function router () {
 
   crossroads.addRoute('#/people', function () {
     $('#root').load('./partials/people.html', function () {
-      console.log('People Page')
+      console.log('Click on People Page')
+      $('#root').load('./partials/people.html', peopleController)
     })
   })
 
