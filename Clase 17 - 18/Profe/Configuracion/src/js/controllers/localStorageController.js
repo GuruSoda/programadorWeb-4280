@@ -1,4 +1,5 @@
 import { getLocalList, setLocalList } from '../utils/localStorage'
+import { searchPersonIndexById } from '../utils/search'
 import translates from '../utils/translates'
 
 function localStorageController () {
@@ -13,6 +14,15 @@ function localStorageController () {
 
     var id = person.url.split('/')[5]
 
+    var button = ''
+
+    if (index !== -1) {
+      button =
+        '<button id="' +
+        id +
+        '" type="button" class="btn btn-danger">Eliminar</button>'
+    }
+
     tableBody.append(
       '<tr><th scope="row">' +
         id +
@@ -26,9 +36,9 @@ function localStorageController () {
         person.mass +
         ' kg</td><td>' +
         person.eye_color +
-        '</td><td><button id="' +
-        id +
-        '" type="button" class="btn btn-danger">Eliminar</button></td></tr>'
+        '</td><td>' +
+        button +
+        '</td></tr>'
     )
 
     var deleteButton = $('.btn-danger')
@@ -52,27 +62,6 @@ function localStorageController () {
 
     console.log(person)
   }
-}
-
-/**
- * searchStudentIndexByText permite buscar la posición de un estudiante en el array,
- * comparando nombre o apellido por valor exacto
- * @param {string} text nombre del estudiante
- * @param {Array} studentsList Array de estudiantes
- * @returns {number} posición del estudiante en el Array, si no lo encuentra -1
- */
-
-function searchPersonIndexById (id, peopleList) {
-  var index = -1
-  for (var i = 0; i < peopleList.length; i++) {
-    var person = peopleList[i]
-    var personId = person.url.split('/')[5]
-    if (personId === id) {
-      index = i
-      break
-    }
-  }
-  return index
 }
 
 export default localStorageController
