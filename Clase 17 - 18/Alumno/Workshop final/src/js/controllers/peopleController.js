@@ -1,31 +1,43 @@
-import { getData } from '../utils/requestData'
+import {
+  getData
+} from '../utils/requestData'
 
-function peopleController () {
+import {
+  addItem,
+  getItem
+} from '../utils/admlocalstorage'
+
+function peopleController() {
   getData('https://swapi.co/api/people/', callbackPeople)
 }
 
-function callbackPeople (error, data) {
-  if (error) return
+var items = []
 
-  //  console.log(data)
+function callbackPeople(error, data) {
+  if (error) {
+    console.error('Error:', data)
+    return
+  }
+
+  console.log(data)
 
   var verMasBoton = $('#seeMore')
   var verMenosBoton = $('#seeLess')
 
   var tableBodyNode = $('#tableBody')
 
-  //  tableBodyNode.remove()
+  $('#tableBody > tr').remove()
 
-  //  var tableBodyNode = getElementByID('#tableBody')
-
-  //  tableBodyNode.innerHTML = ''
+  items = data.results
 
   for (var i = 0; i < data.results.length; i++) {
     //    console.log(data.results[i].name)
 
+    var id = data.results[i].url.split('/')[5]
+
     var node =
       '<tr><td>' +
-      data.results[i].url.split('/')[5] +
+      id +
       '</td><td>' +
       data.results[i].name +
       '</td><td>' +
@@ -37,12 +49,27 @@ function callbackPeople (error, data) {
       '</td><td>' +
       data.results[i].eye_color +
       '</td><td><button id="' +
-      data.results[i].url.split('/')[5] +
+      id +
       '" type="button" class="btn btn-danger">Guardar</button></td></tr>'
 
     tableBodyNode.append(node)
 
-    //   $('#'+data.results[i].url.split('/')[5])
+    $('#' + id).click(function () {
+      console.log('Click en guardar!')
+      $(this).removeClass('btn-danger')
+      $(this).addClass('btn-success')
+      $(this).html('Guardado')
+
+      var id = $(this).attr('id')
+      //      console.log('ID:' + $(this).attr('id'))
+
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].url.split('/')[5] == id) {
+          console.log('Por agregar: ', items[i])
+          addItem(items[i])
+        }
+      }
+    })
   }
 
   if (data.previous) {
@@ -50,6 +77,7 @@ function callbackPeople (error, data) {
 
     verMenosBoton.one('click', function () {
       getData(data.previous, callbackPeople)
+      verMasBoton.unbind()
     })
   } else verMenosBoton.css('display', 'none')
 
@@ -58,16 +86,10 @@ function callbackPeople (error, data) {
 
     verMasBoton.one('click', function () {
       getData(data.next, callbackPeople)
+      verMenosBoton.unbind()
     })
   } else verMasBoton.css('display', 'none')
 
-  //  var GuardarButton = $('.btn-danger')
-
-  // GuardarButton.unbind('click')
-
-  //  GuardarButton.click(function () {
-  //    console.log('Click en ' + $(this).parent().attr('id'))
-  //  })
 }
 
 export default peopleController
