@@ -10,8 +10,15 @@ function callbackPeople (error, data) {
   //  console.log(data)
 
   var verMasBoton = $('#seeMore')
+  var verMenosBoton = $('#seeLess')
 
   var tableBodyNode = $('#tableBody')
+
+  //  tableBodyNode.remove()
+
+  //  var tableBodyNode = getElementByID('#tableBody')
+
+  //  tableBodyNode.innerHTML = ''
 
   for (var i = 0; i < data.results.length; i++) {
     //    console.log(data.results[i].name)
@@ -38,21 +45,29 @@ function callbackPeople (error, data) {
     //   $('#'+data.results[i].url.split('/')[5])
   }
 
+  if (data.previous) {
+    verMenosBoton.css('display', 'inline-block')
+
+    verMenosBoton.one('click', function () {
+      getData(data.previous, callbackPeople)
+    })
+  } else verMenosBoton.css('display', 'none')
+
   if (data.next) {
+    verMasBoton.css('display', 'inline-block')
+
     verMasBoton.one('click', function () {
       getData(data.next, callbackPeople)
     })
-  } else {
-    //  verMasBoton.disable
-  }
+  } else verMasBoton.css('display', 'none')
 
-  var GuardarButton = $('.btn-danger')
+  //  var GuardarButton = $('.btn-danger')
 
-  GuardarButton.unbind('click')
+  // GuardarButton.unbind('click')
 
-  GuardarButton.click(function () {
-    console.log('Click en ' + $(this).parent().attr('id'))
-  })
+  //  GuardarButton.click(function () {
+  //    console.log('Click en ' + $(this).parent().attr('id'))
+  //  })
 }
 
 export default peopleController
