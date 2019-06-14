@@ -1,25 +1,20 @@
-import {
-  getData
-} from '../utils/requestData'
+import { getData } from '../utils/requestData'
 
-import {
-  addItem,
-  getItem
-} from '../utils/admlocalstorage'
+import { addItem, getItem } from '../utils/admlocalstorage'
 
-function peopleController() {
+function peopleController () {
   getData('https://swapi.co/api/people/', callbackPeople)
 }
 
 var items = []
 
-function callbackPeople(error, data) {
+function callbackPeople (error, data) {
   if (error) {
     console.error('Error:', data)
     return
   }
 
-  console.log(data)
+  //  console.log(data)
 
   var verMasBoton = $('#seeMore')
   var verMenosBoton = $('#seeLess')
@@ -63,6 +58,7 @@ function callbackPeople(error, data) {
       var id = $(this).attr('id')
       //      console.log('ID:' + $(this).attr('id'))
 
+      // Busco en los objetos traidos el objeto con el id
       for (var i = 0; i < items.length; i++) {
         if (items[i].url.split('/')[5] == id) {
           console.log('Por agregar: ', items[i])
@@ -89,7 +85,6 @@ function callbackPeople(error, data) {
       verMenosBoton.unbind()
     })
   } else verMasBoton.css('display', 'none')
-
 }
 
 export default peopleController

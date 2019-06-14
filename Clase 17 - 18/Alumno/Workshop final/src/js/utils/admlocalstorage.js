@@ -1,9 +1,9 @@
 var listPeople = []
 
-function getPeopleList() {
-
+// Cargo desde el local storage la data guardada a memoria
+function getPeopleList () {
   if (listPeople.length == 0) {
-    var localStorageList = localStorage.getItem("peopleStarWar")
+    var localStorageList = localStorage.getItem('peopleStarWar')
 
     if (localStorageList) {
       listPeople = JSON.parse(localList)
@@ -11,20 +11,22 @@ function getPeopleList() {
   }
 }
 
-function setPeopleList() {
+// Guarda el vector que se encuentra en memoria en el local storage
+function setPeopleList () {
+  console.log('setPeopleList', listPeople)
 
   if (listPeople.length > 0) {
-    localStorage.setItem("peopleStarWar", listPeople)
+    localStorage.setItem('peopleStarWar', JSON.stringify(listPeople))
   }
 }
 
-function getItem(id) {
+function getItem (item) {
   var item = {}
 
   if (listPeople.length == 0) getPeopleList
 
   for (var i = 0; i < listPeople.length; i++) {
-    if (id = person.url.split('/')[5]) {
+    if (item.name === listPeople[i].name) {
       item = listPeople[i]
     }
   }
@@ -32,29 +34,28 @@ function getItem(id) {
   return item
 }
 
-function addItem(id) {
-  var item = {}
+function addItem (item) {
+  console.log('En Item: ', item)
 
   if (listPeople.length == 0) getPeopleList
 
+  console.log('Total item:', listPeople.length)
+  console.log('antes de agregar', listPeople)
+
+  // busco si ya existe para no agregarlo nuevamente
   for (var i = 0; i < listPeople.length; i++) {
-    if (id = person.url.split('/')[5]) {
-      item = listPeople[i]
+    if (item.name === listPeople[i].name) {
+      return
     }
   }
 
-  console.log('addItem:', item)
+  console.log('por agregar', listPeople)
 
-  if (item) {
-    listPeople.push(item)
+  listPeople.push(item)
 
-    setPeopleList
-  }
+  setPeopleList()
 
-  return item
+  console.log('Total items luego de agregado', listPeople.length)
 }
 
-export {
-  addItem,
-  getItem
-}
+export { addItem, getItem }
