@@ -6,15 +6,15 @@ function getPeopleList () {
     var localStorageList = localStorage.getItem('peopleStarWar')
 
     if (localStorageList) {
-      listPeople = JSON.parse(localList)
+      listPeople = JSON.parse(localStorageList)
     }
   }
+
+  return listPeople
 }
 
 // Guarda el vector que se encuentra en memoria en el local storage
 function setPeopleList () {
-  console.log('setPeopleList', listPeople)
-
   if (listPeople.length > 0) {
     localStorage.setItem('peopleStarWar', JSON.stringify(listPeople))
   }
@@ -23,7 +23,7 @@ function setPeopleList () {
 function getItem (item) {
   var item = {}
 
-  if (listPeople.length == 0) getPeopleList
+  if (listPeople.length == 0) getPeopleList()
 
   for (var i = 0; i < listPeople.length; i++) {
     if (item.name === listPeople[i].name) {
@@ -35,12 +35,7 @@ function getItem (item) {
 }
 
 function addItem (item) {
-  console.log('En Item: ', item)
-
-  if (listPeople.length == 0) getPeopleList
-
-  console.log('Total item:', listPeople.length)
-  console.log('antes de agregar', listPeople)
+  if (listPeople.length == 0) getPeopleList()
 
   // busco si ya existe para no agregarlo nuevamente
   for (var i = 0; i < listPeople.length; i++) {
@@ -49,13 +44,32 @@ function addItem (item) {
     }
   }
 
-  console.log('por agregar', listPeople)
-
   listPeople.push(item)
 
   setPeopleList()
-
-  console.log('Total items luego de agregado', listPeople.length)
 }
 
-export { addItem, getItem }
+function existItem (item) {
+  if (listPeople.length == 0) getPeopleList()
+
+  for (var i = 0; i < listPeople.length; i++) {
+    if (item.name === listPeople[i].name) {
+      return true
+    }
+  }
+
+  return false
+}
+
+function delItem (item) {
+  if (listPeople.length == 0) getPeopleList()
+
+  for (var i = 0; i < listPeople.length; i++) {
+    if (item.name === listPeople[i].name) {
+      listPeople.splice(i, 1)
+      setPeopleList()
+    }
+  }
+}
+
+export { getPeopleList, addItem, getItem, existItem, delItem }

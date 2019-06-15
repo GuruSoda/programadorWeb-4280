@@ -1,6 +1,6 @@
 import { getData } from '../utils/requestData'
 
-import { addItem, getItem } from '../utils/admlocalstorage'
+import { addItem, getItem, existItem } from '../utils/admlocalstorage'
 
 function peopleController () {
   getData('https://swapi.co/api/people/', callbackPeople)
@@ -14,8 +14,6 @@ function callbackPeople (error, data) {
     return
   }
 
-  //  console.log(data)
-
   var verMasBoton = $('#seeMore')
   var verMenosBoton = $('#seeLess')
 
@@ -24,6 +22,8 @@ function callbackPeople (error, data) {
   $('#tableBody > tr').remove()
 
   items = data.results
+
+  var existePersonaje
 
   for (var i = 0; i < data.results.length; i++) {
     //    console.log(data.results[i].name)
@@ -43,25 +43,34 @@ function callbackPeople (error, data) {
       data.results[i].mass +
       '</td><td>' +
       data.results[i].eye_color +
-      '</td><td><button id="' +
+      '</td>'
+
+    existePersonaje = existItem(data.results[i])
+
+    // para ver que tipo de boton le inserto
+    node +=
+      '<td><button id="' +
       id +
-      '" type="button" class="btn btn-danger">Guardar</button></td></tr>'
+      '" type="button" class="btn ' +
+      (!existePersonaje ? 'btn-danger' : 'btn-success') +
+      '">' +
+      (!existePersonaje ? 'Guardar' : 'Guardado') +
+      '</button></td>'
+
+    node += '</tr>'
 
     tableBodyNode.append(node)
 
     $('#' + id).click(function () {
-      console.log('Click en guardar!')
       $(this).removeClass('btn-danger')
       $(this).addClass('btn-success')
       $(this).html('Guardado')
 
       var id = $(this).attr('id')
-      //      console.log('ID:' + $(this).attr('id'))
 
       // Busco en los objetos traidos el objeto con el id
       for (var i = 0; i < items.length; i++) {
         if (items[i].url.split('/')[5] == id) {
-          console.log('Por agregar: ', items[i])
           addItem(items[i])
         }
       }
