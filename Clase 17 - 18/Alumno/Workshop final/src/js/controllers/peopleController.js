@@ -1,5 +1,5 @@
 import { getData } from '../utils/requestData'
-
+import translates from '../utils/translates'
 import { addItem, getItem, existItem } from '../utils/admlocalstorage'
 
 function peopleController () {
@@ -13,6 +13,8 @@ function callbackPeople (error, data) {
     console.error('Error:', data)
     return
   }
+
+  var lang = 'es'
 
   var verMasBoton = $('#seeMore')
   var verMenosBoton = $('#seeLess')
@@ -36,13 +38,19 @@ function callbackPeople (error, data) {
       '</td><td>' +
       data.results[i].name +
       '</td><td>' +
-      data.results[i].gender +
+      (translates[lang]['gender'][data.results[i].gender]
+        ? translates[lang]['gender'][data.results[i].gender]
+        : data.results[i].gender) +
+      //      data.results[i].gender +
       '</td><td>' +
       data.results[i].height +
       '</td><td>' +
       data.results[i].mass +
       '</td><td>' +
-      data.results[i].eye_color +
+      (translates[lang]['eye_color'][data.results[i].eye_color]
+        ? translates[lang]['eye_color'][data.results[i].eye_color]
+        : data.results[i].eye_color) +
+      //data.results[i].eye_color +
       '</td>'
 
     existePersonaje = existItem(data.results[i])

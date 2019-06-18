@@ -34,6 +34,7 @@ function getItem (item) {
   return item
 }
 
+// Como parametro recibe el objeto personaje
 function addItem (item) {
   if (listPeople.length == 0) getPeopleList()
 
@@ -61,13 +62,17 @@ function existItem (item) {
   return false
 }
 
-function delItem (item) {
+// Como parametro recibe el ID del personaje
+function delItem (itemID) {
   if (listPeople.length == 0) getPeopleList()
 
   for (var i = 0; i < listPeople.length; i++) {
-    if (item.name === listPeople[i].name) {
+    var idLocalStorage = listPeople[i].url.split('/')[5]
+
+    if (itemID === idLocalStorage) {
       listPeople.splice(i, 1)
       setPeopleList()
+      break
     }
   }
 }
