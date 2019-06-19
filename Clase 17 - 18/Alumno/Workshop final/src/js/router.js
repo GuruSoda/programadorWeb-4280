@@ -2,6 +2,7 @@ import crossroads from 'crossroads'
 import contactController from './controllers/contactController'
 import peopleController from './controllers/peopleController'
 import localStorageController from './controllers/localStorageController'
+import searchController from './controllers/searchController'
 
 function router () {
   crossroads.addRoute('', function () {
@@ -22,12 +23,28 @@ function router () {
     $('#root').load('./partials/contact.html', contactController)
   })
 
+  crossroads.addRoute('#/search/{string}', function (str) {
+    console.log('Se busco:', str)
+    $('#root').load('./partials/result.html', searchController(str))
+  })
+
   // En cada cambio del # va a verificar las rutas
   $(window).on('hashchange', function () {
     crossroads.parse(window.location.hash)
   })
 
   crossroads.parse(window.location.hash)
+
+  //  crossroads.ignoreState = true
+
+  $('#search').on('click', function () {
+    var busqueda = $('#searchInput').val()
+
+    if (busqueda) {
+      window.location.href = '#/search/' + busqueda
+      //      console.log('window.location:', window.location)
+    }
+  })
 }
 
 export default router

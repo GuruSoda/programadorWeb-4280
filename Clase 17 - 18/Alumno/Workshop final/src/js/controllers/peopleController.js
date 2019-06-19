@@ -41,7 +41,6 @@ function callbackPeople (error, data) {
       (translates[lang]['gender'][data.results[i].gender]
         ? translates[lang]['gender'][data.results[i].gender]
         : data.results[i].gender) +
-      //      data.results[i].gender +
       '</td><td>' +
       data.results[i].height +
       '</td><td>' +
@@ -50,7 +49,6 @@ function callbackPeople (error, data) {
       (translates[lang]['eye_color'][data.results[i].eye_color]
         ? translates[lang]['eye_color'][data.results[i].eye_color]
         : data.results[i].eye_color) +
-      //data.results[i].eye_color +
       '</td>'
 
     existePersonaje = existItem(data.results[i])
