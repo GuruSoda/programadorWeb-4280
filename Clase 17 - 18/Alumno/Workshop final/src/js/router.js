@@ -24,7 +24,6 @@ function router () {
   })
 
   crossroads.addRoute('#/search/{string}', function (str) {
-    console.log('Se busco:', str)
     $('#root').load('./partials/result.html', searchController(str))
   })
 

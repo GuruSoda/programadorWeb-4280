@@ -1,10 +1,17 @@
 import { getData } from '../utils/requestData'
-import { getPeopleList, delItem, existItem } from '../utils/admlocalstorage'
-import translates from '../utils/translates'
+import {
+  delItem,
+  existItem,
+  addItem,
+  changeState
+} from '../utils/admlocalstorage'
+import { translates, cm2Human } from '../utils/translates'
 
 function searchController (strSearch) {
   getData('https://swapi.co/api/people/?search=' + strSearch, callbackSearch)
 }
+
+var items = []
 
 function callbackSearch (error, data) {
   if (error) {
@@ -15,6 +22,8 @@ function callbackSearch (error, data) {
   var tableBodyNode = $('#tableBody')
   var lang = 'es'
 
+  items = data.results
+
   for (var i = 0; i < data.results.length; i++) {
     var id = data.results[i].url.split('/')[5]
 
@@ -24,11 +33,14 @@ function callbackSearch (error, data) {
       '</td><td>' +
       data.results[i].name +
       '</td><td>' +
-      translates[lang]['gender'][data.results[i].gender] +
+      (translates[lang]['gender'][data.results[i].gender]
+        ? translates[lang]['gender'][data.results[i].gender]
+        : data.results[i].gender) +
       '</td><td>' +
-      data.results[i].height +
+      cm2Human(data.results[i].height) +
       '</td><td>' +
       data.results[i].mass +
+      ' Kg' +
       '</td><td>' +
       (translates[lang]['eye_color'][data.results[i].eye_color]
         ? translates[lang]['eye_color'][data.results[i].eye_color]
@@ -54,12 +66,8 @@ function callbackSearch (error, data) {
 
     tableBodyNode.append(node)
 
-    $('#' + id).one('click', function () {
-      console.log('Click! ', $(this).attr('id'))
-
-      $(this).parent().parent().fadeOut(300)
-      delItem($(this).attr('id'))
-    })
+    // para el click en el boton estado
+    $('#' + id).click(items, changeState)
   }
 }
 

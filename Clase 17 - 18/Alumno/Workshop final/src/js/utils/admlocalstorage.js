@@ -15,9 +15,7 @@ function getPeopleList () {
 
 // Guarda el vector que se encuentra en memoria en el local storage
 function setPeopleList () {
-  if (listPeople.length > 0) {
-    localStorage.setItem('peopleStarWar', JSON.stringify(listPeople))
-  }
+  localStorage.setItem('peopleStarWar', JSON.stringify(listPeople))
 }
 
 function getItem (item) {
@@ -69,7 +67,7 @@ function delItem (itemID) {
   for (var i = 0; i < listPeople.length; i++) {
     var idLocalStorage = listPeople[i].url.split('/')[5]
 
-    if (itemID === idLocalStorage) {
+    if (itemID == idLocalStorage) {
       listPeople.splice(i, 1)
       setPeopleList()
       break
@@ -77,4 +75,40 @@ function delItem (itemID) {
   }
 }
 
-export { getPeopleList, addItem, getItem, existItem, delItem }
+// Funcion que cambia el estado de un boton:
+//    Si el registro esta en local storage, lo borra.
+//    Si el registro NO esta en local storage lo agrega.
+//
+// para las funciones de click en guardar/guardado que estan en people/search
+function changeState (event) {
+  var items = event.data
+
+  console.log('Click en ID:', $(this).attr('id'))
+
+  var id = $(this).attr('id')
+
+  if ($(this).attr('localstorage') === '0') {
+    $(this)
+      .removeClass('btn-danger')
+      .addClass('btn-success')
+      .html('Guardado')
+      .attr('localstorage', '1')
+
+    // Busco en los objetos traidos el objeto con el id
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].url.split('/')[5] == id) {
+        addItem(items[i])
+      }
+    }
+  } else if ($(this).attr('localstorage') === '1') {
+    $(this)
+      .removeClass('btn-success')
+      .addClass('btn-danger')
+      .html('Guardar')
+      .attr('localstorage', '0')
+
+    delItem(id)
+  }
+}
+
+export { getPeopleList, addItem, getItem, existItem, delItem, changeState }

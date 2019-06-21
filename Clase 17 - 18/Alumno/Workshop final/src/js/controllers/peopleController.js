@@ -1,6 +1,12 @@
 import { getData } from '../utils/requestData'
-import translates from '../utils/translates'
-import { addItem, getItem, existItem, delItem } from '../utils/admlocalstorage'
+import { translates, cm2Human } from '../utils/translates'
+import {
+  addItem,
+  getItem,
+  existItem,
+  delItem,
+  changeState
+} from '../utils/admlocalstorage'
 
 function peopleController () {
   getData('https://swapi.co/api/people/', callbackPeople)
@@ -42,9 +48,10 @@ function callbackPeople (error, data) {
         ? translates[lang]['gender'][data.results[i].gender]
         : data.results[i].gender) +
       '</td><td>' +
-      data.results[i].height +
+      cm2Human(data.results[i].height) +
       '</td><td>' +
       data.results[i].mass +
+      ' Kg' +
       '</td><td>' +
       (translates[lang]['eye_color'][data.results[i].eye_color]
         ? translates[lang]['eye_color'][data.results[i].eye_color]
@@ -69,32 +76,8 @@ function callbackPeople (error, data) {
 
     tableBodyNode.append(node)
 
-    $('#' + id).click(function () {
-      var id = $(this).attr('id')
-
-      if ($(this).attr('localstorage') === '0') {
-        $(this)
-          .removeClass('btn-danger')
-          .addClass('btn-success')
-          .html('Guardado')
-          .attr('localstorage', '1')
-
-        // Busco en los objetos traidos el objeto con el id
-        for (var i = 0; i < items.length; i++) {
-          if (items[i].url.split('/')[5] == id) {
-            addItem(items[i])
-          }
-        }
-      } else if ($(this).attr('localstorage') === '1') {
-        $(this)
-          .removeClass('btn-success')
-          .addClass('btn-danger')
-          .html('Guardar')
-          .attr('localstorage', '0')
-
-        delItem(id)
-      }
-    })
+    // para el click en el boton guardar
+    $('#' + id).click(items, changeState)
   }
 
   if (data.previous) {

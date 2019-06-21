@@ -32,4 +32,11 @@ var translates = {
   }
 }
 
-export default translates
+// Segun http://www.rae.es/diccionario-panhispanico-de-dudas/apendices/simbolos-alfabetizables
+function cm2Human (cm) {
+  if (cm < 100) return cm + ' cm'
+  else return cm / 100 + ' m'
+}
+
+// export default translates
+export { translates, cm2Human }

@@ -1,5 +1,5 @@
 import { getPeopleList, delItem } from '../utils/admlocalstorage'
-import translates from '../utils/translates'
+import { translates, cm2Human } from '../utils/translates'
 
 function localStorageController () {
   var tableBodyNode = $('#tableBody')
@@ -19,9 +19,10 @@ function localStorageController () {
       '</td><td>' +
       translates[lang]['gender'][peopleLocalStorage[i].gender] +
       '</td><td>' +
-      peopleLocalStorage[i].height +
+      cm2Human(peopleLocalStorage[i].height) +
       '</td><td>' +
       peopleLocalStorage[i].mass +
+      ' Kg' +
       '</td><td>' +
       (translates[lang]['eye_color'][peopleLocalStorage[i].eye_color]
         ? translates[lang]['eye_color'][peopleLocalStorage[i].eye_color]
@@ -33,9 +34,10 @@ function localStorageController () {
     tableBodyNode.append(node)
 
     $('#' + id).one('click', function () {
-      console.log('Click! ', $(this).attr('id'))
+      console.log('Click en ID:', $(this).attr('id'))
 
       $(this).parent().parent().fadeOut(300)
+
       delItem($(this).attr('id'))
     })
   }
