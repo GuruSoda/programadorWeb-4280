@@ -1,5 +1,5 @@
 import { getData } from '../utils/requestData'
-import { getPeopleList, delItem } from '../utils/admlocalstorage'
+import { getPeopleList, delItem, existItem } from '../utils/admlocalstorage'
 import translates from '../utils/translates'
 
 function searchController (strSearch) {
@@ -33,9 +33,24 @@ function callbackSearch (error, data) {
       (translates[lang]['eye_color'][data.results[i].eye_color]
         ? translates[lang]['eye_color'][data.results[i].eye_color]
         : data.results[i].eye_color) +
-      '</td><td><button id="' +
-      id +
-      '" type="button" class="btn btn-success">Eliminar</button></td></tr>'
+      '</td><td>'
+
+    //  Para el boton
+    var existePersonaje = existItem(data.results[i])
+
+    if (existePersonaje) {
+      node +=
+        '<button id="' +
+        id +
+        '" type="button" localstorage="1" class="btn btn-success">Guardado</button></td>'
+    } else {
+      node +=
+        '<button id="' +
+        id +
+        '" type="button" localstorage="0" class="btn btn-danger">Guardar</button></td>'
+    }
+
+    node += '</tr>'
 
     tableBodyNode.append(node)
 

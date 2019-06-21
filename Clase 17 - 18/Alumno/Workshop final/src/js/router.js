@@ -34,17 +34,6 @@ function router () {
   })
 
   crossroads.parse(window.location.hash)
-
-  //  crossroads.ignoreState = true
-
-  $('#search').on('click', function () {
-    var busqueda = $('#searchInput').val()
-
-    if (busqueda) {
-      window.location.href = '#/search/' + busqueda
-      //      console.log('window.location:', window.location)
-    }
-  })
 }
 
 export default router

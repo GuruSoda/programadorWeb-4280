@@ -1,6 +1,6 @@
 import { getData } from '../utils/requestData'
 import translates from '../utils/translates'
-import { addItem, getItem, existItem } from '../utils/admlocalstorage'
+import { addItem, getItem, existItem, delItem } from '../utils/admlocalstorage'
 
 function peopleController () {
   getData('https://swapi.co/api/people/', callbackPeople)
@@ -59,7 +59,9 @@ function callbackPeople (error, data) {
       id +
       '" type="button" class="btn ' +
       (!existePersonaje ? 'btn-danger' : 'btn-success') +
-      '">' +
+      '"' +
+      (!existePersonaje ? 'localstorage="0"' : 'localstorage="1"') +
+      '>' +
       (!existePersonaje ? 'Guardar' : 'Guardado') +
       '</button></td>'
 
@@ -68,17 +70,29 @@ function callbackPeople (error, data) {
     tableBodyNode.append(node)
 
     $('#' + id).click(function () {
-      $(this).removeClass('btn-danger')
-      $(this).addClass('btn-success')
-      $(this).html('Guardado')
-
       var id = $(this).attr('id')
 
-      // Busco en los objetos traidos el objeto con el id
-      for (var i = 0; i < items.length; i++) {
-        if (items[i].url.split('/')[5] == id) {
-          addItem(items[i])
+      if ($(this).attr('localstorage') === '0') {
+        $(this)
+          .removeClass('btn-danger')
+          .addClass('btn-success')
+          .html('Guardado')
+          .attr('localstorage', '1')
+
+        // Busco en los objetos traidos el objeto con el id
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].url.split('/')[5] == id) {
+            addItem(items[i])
+          }
         }
+      } else if ($(this).attr('localstorage') === '1') {
+        $(this)
+          .removeClass('btn-success')
+          .addClass('btn-danger')
+          .html('Guardar')
+          .attr('localstorage', '0')
+
+        delItem(id)
       }
     })
   }
