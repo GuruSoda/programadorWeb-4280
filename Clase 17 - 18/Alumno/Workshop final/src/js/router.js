@@ -1,6 +1,8 @@
 import crossroads from 'crossroads'
 import contactController from './controllers/contactController'
 import peopleController from './controllers/peopleController'
+import localStorageController from './controllers/localStorageController'
+import searchController from './controllers/searchController'
 
 function router () {
   crossroads.addRoute('', function () {
@@ -10,20 +12,19 @@ function router () {
   })
 
   crossroads.addRoute('#/people', function () {
-    $('#root').load('./partials/people.html', function () {
-      console.log('Click on People Page')
-      $('#root').load('./partials/people.html', peopleController)
-    })
+    $('#root').load('./partials/people.html', peopleController)
   })
 
   crossroads.addRoute('#/local-storage', function () {
-    $('#root').load('./partials/local-storage.html', function () {
-      console.log('Local Storage')
-    })
+    $('#root').load('./partials/local-storage.html', localStorageController)
   })
 
   crossroads.addRoute('#/contact', function () {
     $('#root').load('./partials/contact.html', contactController)
+  })
+
+  crossroads.addRoute('#/search/{string}', function (str) {
+    $('#root').load('./partials/result.html', searchController(str))
   })
 
   // En cada cambio del # va a verificar las rutas
