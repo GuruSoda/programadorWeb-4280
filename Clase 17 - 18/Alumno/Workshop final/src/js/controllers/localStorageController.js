@@ -36,7 +36,7 @@ function localStorageController () {
     $('#' + id).one('click', function () {
       console.log('Click en ID:', $(this).attr('id'))
 
-      $(this).parent().parent().fadeOut(300)
+      $(this).parent().parent().fadeOut(500)
 
       delItem($(this).attr('id'))
     })

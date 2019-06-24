@@ -88,11 +88,14 @@ function changeState (event) {
   var id = $(this).attr('id')
 
   if ($(this).attr('localstorage') === '0') {
-    $(this)
-      .removeClass('btn-danger')
-      .addClass('btn-success')
-      .html('Guardado')
-      .attr('localstorage', '1')
+    $(this).fadeOut(1000, function () {
+      $(this)
+        .removeClass('btn-danger')
+        .addClass('btn-success')
+        .html('Guardado')
+        .fadeIn(2000)
+        .attr('localstorage', '1')
+    })
 
     // Busco en los objetos traidos el objeto con el id
     for (var i = 0; i < items.length; i++) {
@@ -101,11 +104,14 @@ function changeState (event) {
       }
     }
   } else if ($(this).attr('localstorage') === '1') {
-    $(this)
-      .removeClass('btn-success')
-      .addClass('btn-danger')
-      .html('Guardar')
-      .attr('localstorage', '0')
+    $(this).fadeOut(1000, function () {
+      $(this)
+        .removeClass('btn-success')
+        .addClass('btn-danger')
+        .html('Guardar')
+        .fadeIn(2000)
+        .attr('localstorage', '0')
+    })
 
     delItem(id)
   }
