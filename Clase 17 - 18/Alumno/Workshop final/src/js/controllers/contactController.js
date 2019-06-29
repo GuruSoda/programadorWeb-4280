@@ -1,3 +1,5 @@
+import { postData } from '../utils/requestData'
+
 function contactController () {
   // Busco los nodos que voy a utilizar
   var firstNameInputNode = $('#firstName')
