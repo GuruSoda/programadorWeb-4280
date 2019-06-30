@@ -1,105 +1,80 @@
 import { postData } from '../utils/requestData'
 
 function contactController () {
-  // Busco los nodos que voy a utilizar
   var firstNameInputNode = $('#firstName')
   var emailInputNode = $('#email')
   var commentsInputNode = $('#comments')
   var submitButtonNode = $('#submitButton')
 
-  firstNameInputNode.one('blur', validateEmtpyField)
+  firstNameInputNode.on('input blur', validateEmtpyField)
+  emailInputNode.on('input blur', validateEmailField)
+  commentsInputNode.on('input blur', validateEmtpyField)
 
-  emailInputNode.one('blur', validateEmailField)
-
-  commentsInputNode.one('blur', validateEmtpyField)
-
-  /**
- * validateEmtpyField es una función que el campo tenga un valor
- *
- * @param {HTMLEvent} event
- */
-
+  // Si el campo esta vacio agrega un div con la leyenda "Campo requerido"
   function validateEmtpyField (event) {
     var inputNode = $(this)
 
-    var errorText = ''
     inputNode.next().remove()
 
     if (!inputNode.val()) {
-      errorText = 'Campo requerido'
-    }
-
-    if (errorText) {
-      inputNode.addClass('is-invalid')
-      inputNode.removeClass('is-valid')
+      inputNode.removeClass('is-valid').addClass('is-invalid')
+      inputNode.attr('correcto', '0')
 
       var parentNode = inputNode.parent()
 
-      parentNode.append('<div class="invalid-feedback">' + errorText + '</div>')
+      parentNode.append('<div class="invalid-feedback">Campo requerido</div>')
     } else {
-      inputNode.addClass('is-valid')
-      inputNode.removeClass('is-invalid')
-    }
-
-    if (event.type === 'blur') {
-      inputNode.on('input', validateEmtpyField)
+      inputNode.removeClass('is-invalid').addClass('is-valid')
+      inputNode.attr('correcto', '1')
     }
 
     validateButton()
   }
 
-  /**
- * validateEmailField es una función que valida que el campo sea email
- *
- * @param {HTMLEvent} event
- */
+  // Verifica si el campo esta vacio y/o tiene un correo correcto.
+  // El campo de correo se verifica media una expresion regular.
   function validateEmailField (event) {
     var inputNode = $(this)
 
-    var errorText = ''
+    var msgError = ''
 
     inputNode.next().remove()
 
     var value = inputNode.val()
 
     if (!value) {
-      errorText = errorText + 'Campo requerido '
+      msgError = 'Campo requerido '
     } else {
-      if (value.indexOf('@') === -1) {
-        errorText = errorText + 'Debe contener arroba (@) '
-      }
-      if (value.indexOf('.') === -1) {
-        errorText = errorText + 'Debe contener punto (.) '
+      if (
+        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(value) ===
+        false
+      ) {
+        msgError = 'Formato: nombre usuario + @ + servidor + dominio'
       }
     }
 
-    if (errorText) {
-      inputNode.addClass('is-invalid')
-      inputNode.removeClass('is-valid')
+    if (msgError) {
+      inputNode.removeClass('is-valid').addClass('is-invalid')
+      inputNode.attr('correcto', '0')
 
       var parentNode = inputNode.parent()
 
-      parentNode.append('<div class="invalid-feedback">' + errorText + '</div>')
+      parentNode.append('<div class="invalid-feedback">' + msgError + '</div>')
     } else {
-      inputNode.addClass('is-valid')
-      inputNode.removeClass('is-invalid')
-    }
-
-    if (event.type === 'blur') {
-      inputNode.on('input', validateEmailField)
+      inputNode.removeClass('is-invalid').addClass('is-valid')
+      inputNode.attr('correcto', '1')
     }
 
     validateButton()
   }
 
-  /**
- * validateButton habilita el botón de submit si existen
- * al menos cuatro nodos con la clase is-valid
- */
+  // Verifica que los campos necesarios para hacer el post tengo el atributo correcto con el valor 1
   function validateButton () {
-    var validInputNodes = $('.is-valid')
-
-    if (validInputNodes.length === 3) {
+    if (
+      firstNameInputNode.attr('correcto') === '1' &&
+      emailInputNode.attr('correcto') === '1' &&
+      commentsInputNode.attr('correcto') === '1'
+    ) {
       submitButtonNode.attr('disabled', false)
     } else {
       submitButtonNode.attr('disabled', true)
